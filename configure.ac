@@ -5,7 +5,7 @@ AC_CONFIG_SRCDIR(common/simplejson.c)
 # AC_CANONICAL_HOST is needed to access $host_os
 AC_CANONICAL_HOST
 
-os_dir=${os_dir}
+os_dir=unix
 
 case "$(host_os}" in
         cygwin*|mingw*)
