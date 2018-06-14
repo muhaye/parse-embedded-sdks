@@ -25,12 +25,11 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
-//#include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
-#include <sys/utsname.h>
+#include <windows.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
@@ -90,13 +89,14 @@ static int parseOsSetLocalStorageIfNeeded(const char* applicationId) {
 }
 
 void parseOsGetVersion(char* buffer, size_t size) {
-    struct utsname about;
-    if (uname(&about)) {
+    OSVERSIONINFO osvi;
+    ZeroMemory(&osvi, sizeof(OSVERSIONINFO));
+    if (GetVersionEx(&osvi)){
         parseLog(PARSE_LOG_WARN, "Failed to get OS info: %s\n", strerror(errno));
         snprintf(buffer, size, "unknown");
         return;
     }
-    snprintf(buffer, size, "%s-%s-%s", about.sysname, about.release, about.machine);
+    snprintf(buffer, size, "%s-%s-%s", "Windows", osvi.dwMajorVersion, osvi.dwMinorVersion);
     parseLog(PARSE_LOG_INFO, "os version:  %s\n", buffer);
 }
 

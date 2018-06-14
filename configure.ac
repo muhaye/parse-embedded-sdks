@@ -1,6 +1,18 @@
 AC_INIT(parse-embedded, 1.0.5, damiank@fb.com)
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_SRCDIR(common/simplejson.c)
+
+# AC_CANONICAL_HOST is needed to access $host_os
+AC_CANONICAL_HOST
+
+os_dir=${os_dir}
+
+case "$(host_os}" in
+        cygwin*|mingw*)
+            os_dir=mingw
+            ;;
+esac
+
 AC_CONFIG_SRCDIR(unix/src/parse.c)
 AC_CONFIG_HEADERS([config.h])
 
@@ -44,13 +56,13 @@ AM_CONDITIONAL([YUN_SUPPORT], [test x$yun = xtrue])
 
 AC_CONFIG_FILES([
   Makefile
-  unix/Makefile
-  unix/src/Makefile
+  ${os_dir}/Makefile
+  ${os_dir}/src/Makefile
   common/Makefile
 ])
 
 AM_COND_IF([YUN_SUPPORT],
-           [AC_CONFIG_FILES([unix/yun/Makefile])])
+           [AC_CONFIG_FILES([${os_dir}/yun/Makefile])])
 
 AC_OUTPUT
 
