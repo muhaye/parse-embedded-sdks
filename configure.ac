@@ -13,6 +13,8 @@ case "$(host_os}" in
             ;;
 esac
 
+AM_CONDITIONAL([WINDOWS], [test "$os_dir" = "mingw"])
+
 AC_CONFIG_SRCDIR(unix/src/parse.c)
 AC_CONFIG_HEADERS([config.h])
 

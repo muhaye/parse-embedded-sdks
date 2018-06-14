@@ -1,4 +1,4 @@
-ifeq ($(OS),Windows_NT)
+if WINDOWS
 SUBDIRS = mingw
 else
 SUBDIRS = unix
