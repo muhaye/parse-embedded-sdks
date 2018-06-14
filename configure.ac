@@ -7,7 +7,7 @@ AC_CANONICAL_HOST
 
 os_dir=unix
 
-case "$(host_os}" in
+case "${host_os}" in
         cygwin*|mingw*)
             os_dir=mingw
             ;;
