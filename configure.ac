@@ -56,9 +56,11 @@ AC_ARG_ENABLE([yun],
 esac],[yun=false])
 AM_CONDITIONAL([YUN_SUPPORT], [test x$yun = xtrue])
 
+AC_CONFIG_FILES([Makefile common/Makefile])
+
 AM_COND_IF([WINDOWS],
-           AC_CONFIG_FILES([Makefile mingw/Makefile mingw/src/Makefile common/Makefile]),
-           AC_CONFIG_FILES([Makefile unix/Makefile unix/src/Makefile common/Makefile])
+           AC_CONFIG_FILES([mingw/Makefile mingw/src/Makefile]),
+           AC_CONFIG_FILES([unix/Makefile unix/src/Makefile])
            )
 
 AM_COND_IF([YUN_SUPPORT],
