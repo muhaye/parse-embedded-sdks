@@ -1,2 +1,1 @@
-
-SUBDIRS = src $(ADDSUBDIRS)
+SUBDIRS = src 
