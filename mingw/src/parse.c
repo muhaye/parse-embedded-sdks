@@ -531,6 +531,7 @@ static void parseSendRequestInternal(
         return;
     }
 
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0);
     result = curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, httpVerb);
     if (result != CURLE_OK) {
         if (callback != NULL) callback(client, result, 0, NULL);
@@ -642,7 +643,6 @@ static void parseSendRequestInternal(
         return;
     }
 
-    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0);
     result = curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0L);
     if (result != CURLE_OK) {
         if (callback != NULL) callback(client, result, 0, NULL);
